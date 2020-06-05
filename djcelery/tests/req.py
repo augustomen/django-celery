@@ -2,7 +2,6 @@ from __future__ import absolute_import, unicode_literals
 
 from django.test import Client
 from django.core.handlers.wsgi import WSGIRequest
-from django.core.handlers.base import BaseHandler
 
 from celery.utils.compat import WhateverIO
 
@@ -51,16 +50,11 @@ class RequestFactory(Client):
 class MockRequest(object):
 
     def __init__(self):
-        handler = BaseHandler()
-        handler.load_middleware()
         self.request_factory = RequestFactory()
-        self.middleware = handler._request_middleware
 
     def _make_request(self, request_method, *args, **kwargs):
         request_method_handler = getattr(self.request_factory, request_method)
         request = request_method_handler(*args, **kwargs)
-        [middleware_processor(request)
-            for middleware_processor in self.middleware]
         return request
 
     def get(self, *args, **kwargs):

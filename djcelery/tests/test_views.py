@@ -9,6 +9,7 @@ from billiard.einfo import ExceptionInfo
 from django.http import HttpResponse
 from django.test.testcases import TestCase as DjangoTestCase
 from django.template import TemplateDoesNotExist
+from django.urls import reverse
 
 from anyjson import deserialize
 
@@ -19,11 +20,6 @@ from celery.utils import gen_unique_id, get_full_cls_name
 
 from djcelery.views import task_webhook
 from djcelery.tests.req import MockRequest
-
-try:
-    from django.urls import reverse  # Django 1.10+
-except ImportError:
-    from django.core.urlresolvers import reverse
 
 
 def reversestar(name, **kwargs):
