@@ -1,4 +1,4 @@
-Looking for sponsor for working on django 1.11 to 2.2 support https://github.com/celery/django-celery/issues/568
+This fork contains minimal adaptations to work with Django 3.0 + Celery 3.1.
 
 ===============================================
  django-celery - Celery Integration for Django

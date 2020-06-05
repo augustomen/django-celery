@@ -49,7 +49,8 @@ else:
     @contextmanager
     def commit_on_success(using=None):  # noqa
         connection = transaction.get_connection(using)
-        if connection.features.autocommits_when_autocommit_is_off:
+        # Starting Django 3.0a1, this feature is no longer supported, and should be considered False
+        if getattr(connection.features, 'autocommits_when_autocommit_is_off', False):
             # ignore stupid warnings and errors
             yield
         else:
